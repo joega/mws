@@ -8,6 +8,7 @@ import (
 //Env  .
 var Env env
 
+
 func init() {
 	//名称
 	Env.nameMap = map[string]string{
@@ -26,6 +27,10 @@ func init() {
 		"A39IBJ37TRP1C6": "AU", // Australia
 		"A1VC38T7YXB528": "JP", // Japan
 		"AAHKV2X7AFYLW":  "CN", // China
+		"A19VAU5U5O7RUS": "SG", // Singapore
+		"ARBP9OOSHTCHU": "EG", // Egypt
+		"A1805IZSGTT6HS": "NL", // Netherlands
+
 	}
 	//域名
 	Env.webDomainMap = map[string]string{
@@ -44,6 +49,9 @@ func init() {
 		"A39IBJ37TRP1C6": "amazon.com.au", // AU Australia
 		"A1VC38T7YXB528": "amazon.co.jp",  // JP Japan
 		"AAHKV2X7AFYLW":  "amazon.cn",     // CN China
+		"A19VAU5U5O7RUS": "amazon.sg", 	   // SG Singapore
+		"ARBP9OOSHTCHU": "amazon.eg",      // EG Egypt
+		"A1805IZSGTT6HS": "amazon.nl",     // NL Netherlands
 	}
 	//开发者平台域名
 	Env.mwsDomainMap = map[string]string{
@@ -62,6 +70,9 @@ func init() {
 		"A1VC38T7YXB528": "mws.amazonservices.jp",     // JP Japan
 		"A39IBJ37TRP1C6": "mws.amazonservices.com.au", // AU Australia
 		"AAHKV2X7AFYLW":  "mws.amazonservices.com.cn", // CN China
+		"A19VAU5U5O7RUS": "mws-fe.amazonservices.com", // SG Singapore
+		"ARBP9OOSHTCHU":  "mws-eu.amazonservices.com", // EG Egypt
+		"A1805IZSGTT6HS": "mws-eu.amazonservices.com", // NL Netherlands
 	}
 	//时区 INNA时区
 	Env.tzMap = map[string]string{
@@ -80,13 +91,16 @@ func init() {
 		"A39IBJ37TRP1C6": "Australia/Sydney",    // AU Australia
 		"A1VC38T7YXB528": "Asia/Tokyo",          // JP Japan
 		"AAHKV2X7AFYLW":  "Asia/Shanghai",       // CN China
+		"A19VAU5U5O7RUS": "Asia/Singapore",      // SG Singapore
+		"ARBP9OOSHTCHU":  "Africa/Cairo",        // EG Egypt
+		"A1805IZSGTT6HS": "Europe/Amsterdam",    // NL Netherlands
 	}
 	//国家分组
 	Env.areaMap = map[string][]string{
-		"NA": {"ATVPDKIKX0DER", "A2EUQ1WTGCTBG2", "A1AM78C64UM0Y8", "A2Q3Y263D00KWC"},                                                                        //南美:美加墨巴
-		"EU": {"A2VIGQ35RCS4UG", "A1PA6795UKMFR9", "A1RKKUPIHCS9HS", "A13V1IB3VIYZZH", "A1F83G8C2ARO7P", "A21TJRUUN4KGV", "APJ6JRA9NG5V4", "A33AVAJ2PDY3EV"}, //欧洲:德西法英印意土
-		"FE": {"A39IBJ37TRP1C6", "A1VC38T7YXB528"},                                                                                                           //远东:澳日
-		"CN": {"AAHKV2X7AFYLW"},                                                                                                                              //中国:中
+		"NA": {"ATVPDKIKX0DER", "A2EUQ1WTGCTBG2", "A1AM78C64UM0Y8", "A2Q3Y263D00KWC"},
+		"EU": {"A2VIGQ35RCS4UG", "A1PA6795UKMFR9", "A1RKKUPIHCS9HS", "A13V1IB3VIYZZH", "A1F83G8C2ARO7P", "A21TJRUUN4KGV", "APJ6JRA9NG5V4", "A33AVAJ2PDY3EV", "ARBP9OOSHTCHU", "A1805IZSGTT6HS" },
+		"FE": {"A39IBJ37TRP1C6", "A1VC38T7YXB528", "A19VAU5U5O7RUS"},
+		"CN": {"AAHKV2X7AFYLW"},
 	}
 	//国家关联
 	Env.linkMap = map[string][]string{
@@ -105,6 +119,9 @@ func init() {
 		"A39IBJ37TRP1C6": Env.areaMap["FE"], // AU Australia
 		"A1VC38T7YXB528": Env.areaMap["FE"], // JP Japan
 		"AAHKV2X7AFYLW":  Env.areaMap["CN"], // CN China
+		"A19VAU5U5O7RUS": Env.areaMap["FE"], // SG Singapore
+		"ARBP9OOSHTCHU":  Env.areaMap["EU"], // EG Egypt
+		"A1805IZSGTT6HS": Env.areaMap["EU"], // NL Netherlands
 	}
 }
 
