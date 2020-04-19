@@ -51,9 +51,13 @@ type SKUIdentifier struct {
 	SellerSKU     string
 }
 
-// GetMyPriceForSKU 根据 SellerSKU，返回您自己的商品的价格信息。
-//
-// GetMyPriceForSKU 操作会根据您指定的 SellerSKU 和 MarketplaceId，返回您自己的商品的价格信息。请注意，如果您提交了并未销售的商品的 SellerSKU，则此操作会返回空的 Offers 元素。此操作最多可返回 20 款商品的价格信息。
+// GetMyPriceForSKU operation returns pricing information for your own active offer
+// listings, based on the ASIN mapped to the SellerSKU and MarketplaceId that you specify.
+// Note that if you submit a SellerSKU for a product for which you don’t have an active
+// offer listing, the operation returns an empty Offers element. This operation returns
+// pricing information for a maximum of 20 offer listings.
+// Maximum request quota	Restore rate				Hourly request quota
+// 20 requests				10 items every second		36000 requests per hour
 func (s *ProductService) GetMyPriceForSKU(c *Credential, marketplace string, sellerSKUList []string, itemCondition string) (requestID string, prices []GetMyPriceForSKUResult, err error) {
 	data := ActionValues("GetMyPriceForSKU")
 	data.Set("MarketplaceId", marketplace)
@@ -68,9 +72,9 @@ func (s *ProductService) GetMyPriceForSKU(c *Credential, marketplace string, sel
 	return
 }
 
-// GetMyPriceForASIN 根据 ASIN，返回您自己的商品的价格信息。
-//
-// GetMyPriceForASIN 操作与 GetMyPriceForSKU 大体相同，但前者使用 MarketplaceId 和 ASIN 来唯一标识一件商品，且不会返回 SKUIdentifier 元素。
+// GetMyPriceForASIN operation is the same as the GetMyPriceForSKU operation except
+// that it uses a MarketplaceId and an ASIN to uniquely identify a product, and it does
+// not return the SKUIdentifier element.
 func (s *ProductService) GetMyPriceForASIN(c *Credential, marketplace string, asinList []string, itemCondition string) (requestID string, prices []GetMyPriceForASINResult, err error) {
 	data := ActionValues("GetMyPriceForASIN")
 	data.Set("MarketplaceId", marketplace)

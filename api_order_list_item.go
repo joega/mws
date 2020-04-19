@@ -52,19 +52,14 @@ type InvoiceData struct {
 	InvoiceInformation           string `xml:"InvoiceInformation"`           //发票信息。 NotApplicable - 买家不- 要求开具发票。 BuyerSelectedInvoiceCategory - 亚马逊建议将此项操作返回的BuyerSelectedInvoiceCategory值作为发票上的发票类目 ProductTitle - 亚马逊建议将商品名称作为发票上的发票类目。
 }
 
-//ListOrderItems 根据您指定的 AmazonOrderId 返回订单商品。
-//
-// http://docs.developer.amazonservices.com/en_US/orders-2013-09-01/Orders_ListOrderItems.html
-// http://docs.developer.amazonservices.com/en_US/orders-2013-09-01/Orders_ListOrderItemsByNextToken.html
-//
-// 该 ListOrderItems 操作可为您所指定的 AmazonOrderId 返回订单商品信息。
-// 订单商品信息包括 Title、ASIN、 SellerSKU、ItemPrice、 ShippingPrice 以及税费和促销信息。
-//
-// 您可以通过 ListOrders 操作来检索订单商品信息，进而找到您在指定时间段内所创建或更新的订单。
-// 所返回的订单中包含 AmazonOrderId。
-// 然后，您便可以通过操作使用这些 AmazonOrderId 值，ListOrderItems 以获取每个订单的详细订单商品信息。
-//
-// 共享最大请求限额为 30 个，恢复速率为每 2 秒钟 1 个请求。
+
+// ListOrderItems operation returns order item information for an AmazonOrderId that
+// you specify. The order item information includes Title, ASIN, SellerSKU, ItemPrice,
+// ShippingPrice, as well as tax and promotion information.  You can retrieve order item
+// information by first using the ListOrders operation to find orders created or updated
+// during a time frame that you specify. An AmazonOrderId is included with each order that
+// is returned. You can then use these AmazonOrderId values with the ListOrderItems
+// operation to get detailed order item information for each order.
 func (s *OrderService) ListOrderItems(c *Credential, amazonOrderID string) (requestID string, orderItemsResult *OrderItemsResult, err error) {
 	data := ActionValues("ListOrderItems")
 	data.Set("AmazonOrderId", amazonOrderID)
@@ -79,7 +74,9 @@ func (s *OrderService) ListOrderItems(c *Credential, amazonOrderID string) (requ
 	return response.RequestID, response.OrderItems, nil
 }
 
-//ListOrderItemsByNextToken 同 ListOrderItems
+// ListOrderItemsByNextToken operation returns the next page of order items using
+// the NextToken value that was returned by your previous request to either ListOrderItems
+// or ListOrderItemsByNextToken. If NextToken is not returned, there are no more pages to return.
 func (s *OrderService) ListOrderItemsByNextToken(c *Credential, amazonOrderID, nextToken string) (string, *OrderItemsResult, error) {
 	data := ActionValues("ListOrderItemsByNextToken")
 	data.Set("NextToken", nextToken)

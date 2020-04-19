@@ -83,8 +83,10 @@ type Image struct {
 	Height UnitValue `xml:"Height"`
 }
 
-//GetMatchingProductForID 根据 ASIN、GCID、SellerSKU、UPC、EAN、ISBN 和 JAN，返回商品及其属性列表。
-//根据您指定的商品编码值列表，GetMatchingProductForId 操作会返回一个包含商品及其属性的列表。可能的商品编号包括：ASIN、GCID、SellerSKU、UPC、EAN、ISBN 和 JAN。
+
+// GetMatchingProductForId operation returns a list of products and their attributes,
+// based on a list of product identifier values that you specify. Possible product
+// identifiers are ASIN, GCID, SellerSKU, UPC, EAN, ISBN, and JAN.
 func (s *ProductService) GetMatchingProductForID(c *Credential, marketplaceID string, idType string, idList ...string) (string, []*Product, error) {
 	data := ActionValues("GetMatchingProductForId")
 	data.Set("MarketplaceId", marketplaceID)

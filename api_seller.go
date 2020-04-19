@@ -36,11 +36,10 @@ type Marketplace struct {
 	DomainName          string
 }
 
-// ListMarketplaceParticipations Returns a list of marketplaces that the seller submitting the request can sell in, and a list of participations that include seller-specific information in that marketplace.
-//
-// The ListMarketplaceParticipations operation gets a list of marketplaces a seller can participate in and a list of participations that include seller-specific information in that marketplace. Note that the operation returns only those marketplaces where the seller's account is in an active state.
-//
-// The ListMarketplaceParticipations and ListMarketplaceParticipationsByNextToken operations together share a maximum request quota of 15 and a restore rate of one request per minute. For definitions of throttling terminology and for a complete explanation of throttling, see 限制：针对提交请求频率的限制 in the 亚马逊MWS开发者指南.
+// ListMarketplaceParticipations operation gets a list of marketplaces a seller
+// can participate in and a list of participations that include seller-specific
+// information in that marketplace. Note that the operation returns only those
+// marketplaces where the seller's account is in an active state.
 func (s *SellerService) ListMarketplaceParticipations(c *Credential, nextToken string) (string, *MarketplaceParticipationsResult, error) {
 	data := ActionValues("ListMarketplaceParticipations")
 	if nextToken != "" {

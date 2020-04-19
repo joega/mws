@@ -23,13 +23,15 @@ type ReportRequestInfo struct {
 	CompletedDate          time.Time
 }
 
-// GetReportRequestList 返回可用于获取报告的 ReportRequestId 的报告请求列表。
-//
-// GetReportRequestList 操作返回与查询参数相匹配的报告请求列表。您可为报告状态、日期范围和报告类型指定查询参数。列表中包含每个报告请求的 ReportRequestId。您可以通过在 GetReportList 操作中指定 ReportRequestId 值，来获取 ReportId 值。
-//
-// 对于首次请求，最多可返回 100 个报告请求。如果要返回更多报告请求，则将响应中所返回的 HasNext 值设置为 true。要检索所有结果，您可以将 NextToken 参数的值重复传递给 GetReportRequestListByNextToken 操作，直至 HasNext 的返回值为 false。
-//
-// GetReportRequestList 操作的最大请求限额为 10 个，恢复速率为每 45 秒 1 个请求。有关限制术语的定义，请参阅限制。
+// GetReportRequestList operation returns a list of report requests that match the
+// query parameters. You can specify query parameters for report status, date range,
+// and report type. The list contains the ReportRequestId for each report request.
+// You can obtain ReportId values by passing the ReportRequestId values to the
+// GetReportList operation. In the first request, a maximum of 100 report requests
+// are returned. If there are additional report requests to return, HasNext is returned
+// set to true in the response . To retrieve all the results, you can pass the value of
+// the NextToken parameter to call GetReportRequestListByNextToken operation iteratively
+// until HasNext is returned set to false.
 func (s *ReportService) GetReportRequestList(c *Credential, params ...Values) (string, *ReportRequestListResult, error) {
 	data := ActionValues("GetReportRequestList")
 	data.SetAll(params...)
@@ -43,11 +45,11 @@ func (s *ReportService) GetReportRequestList(c *Credential, params ...Values) (s
 	return response.RequestID, response.ReportRequestList, nil
 }
 
-// GetReportRequestListByNextToken 可通过之前请求提供给 GetReportRequestListByNextToken 或 GetReportRequestList 的 NextToken 值，返回报告请求列表，其中前一请求中的 HasNext 值为 true。
-//
-// GetReportRequestListByNextToken 操作返回与查询参数相匹配的报告请求列表。该操作使用之前请求提供给 GetReportRequestListByNextToken 或 GetReportRequestList 的 NextToken 值,其中前一请求中的 HasNext 值为 true。
-//
-// GetReportRequestListByNextToken 操作的最大请求限额为 30 个，恢复速率为每 2 秒 1 个请求。有关限制术语的定义，请参阅限制。
+// GetReportRequestListByNextToken operation returns a list of report requests
+// that match the query parameters. This operation uses the NextToken, which was
+// supplied by a previous request to either GetReportRequestListByNextToken or a
+// request to GetReportRequestList, where the value of HasNext was true in that
+// previous request.
 func (s *ReportService) GetReportRequestListByNextToken(c *Credential, nextToken string) (string, *ReportRequestListResult, error) {
 	data := ActionValues("GetReportRequestListByNextToken")
 	data.Set("NextToken", nextToken)

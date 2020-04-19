@@ -77,30 +77,12 @@ type PaymentExecutionDetailItem struct {
 	PaymentMethod string `xml:"PaymentMethod"`
 }
 
-//ListOrders 返回您在指定时间段内所创建或更新的订单。
-//
-// **参考**
-//
-// http://docs.developer.amazonservices.com/en_US/orders-2013-09-01/Orders_ListOrders.html
-//
-// http://docs.developer.amazonservices.com/en_US/orders-2013-09-01/Orders_ListOrdersByNextToken.html
-//
-// **描述**
-//
-// 该 `ListOrders` 操作可返回您在指定时间段内创建或更新的订单列表。
-// 您可以通过 `CreatedAfter` 参数或 `LastUpdatedAfter` 参数来指定时间段。
-// 您必须使用其中一个参数，但不可同时使用两个参数。您还可以通过应用筛选条件来缩小返回的订单列表范围。
-//
-// 该 ListOrders 操作包括每个所返回订单的订单详情，
-// 其中包括 `AmazonOrderId`、 `OrderStatus`、 `FulfillmentChannel` 和 `LastUpdateDate`。
-//
-// **参数**
-//
-// `timeIsUpdate` 为 true, `startTime` 即 `LastUpdatedAfter`, 否则 为 `CreatedAfter`
-//
-// **限制**
-//
-// 共享最大请求限额为 6 个，恢复速率为每分钟 1 个请求。
+// ListOrders operation returns a list of orders created or updated during a time
+// frame that you specify. You define that time frame using the CreatedAfter parameter
+// or the LastUpdatedAfter parameter. You must use one of these parameters, but not
+// both. You can also apply a range of filtering criteria to narrow the list of orders
+// that is returned. The ListOrders operation includes order information for each order
+// returned, including AmazonOrderId, OrderStatus, FulfillmentChannel, and LastUpdateDate.
 func (s *OrderService) ListOrders(c *Credential, marketplaces []string, startTime time.Time, timeIsUpdate bool, maxPerPage int64, params ...Values) (string, *OrdersResult, error) {
 	data := ActionValues("ListOrders")
 	if !startTime.IsZero() {
@@ -126,7 +108,9 @@ func (s *OrderService) ListOrders(c *Credential, marketplaces []string, startTim
 	return response.RequestID, response.Orders, nil
 }
 
-//ListOrdersByNextToken 同 ListOrders
+// ListOrdersByNextToken operation returns the next page of orders using the NextToken
+// value that was returned by your previous request to either ListOrders or ListOrdersByNextToken.
+// If NextToken is not returned, there are no more pages to return.
 func (s *OrderService) ListOrdersByNextToken(c *Credential, nextToken string) (string, *OrdersResult, error) {
 	data := ActionValues("ListOrdersByNextToken")
 	data.Set("NextToken", nextToken)
