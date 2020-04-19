@@ -8,18 +8,18 @@ type ReportService struct {
 
 //ReportListResult .
 type ReportListResult struct {
-	HasNext   bool
-	NextToken string
+	HasNext   bool // A Boolean value that indicates whether there are more items to return, requiring additional calls to this operation to retrieve them
+	NextToken string // A string token used to pass information to another call. Use the NextToken to call the operation again if the value of HasNext is true.
 	Reports   []*ReportInfo `xml:"ReportInfo"`
 }
 
 //ReportInfo .
 type ReportInfo struct {
-	ReportID        string `xml:"ReportId"`
-	ReportRequestID string `xml:"ReportRequestId"`
-	ReportType      string
-	Acknowledged    bool
-	AvailableDate   *time.Time
+	ReportID        string `xml:"ReportId"`	// A unique report identifier
+	ReportRequestID string `xml:"ReportRequestId"` // A unique report request identifier.
+	ReportType      string // The ReportType value requested
+	Acknowledged    bool // A Boolean value that indicates if the report was acknowledged by this call to the UpdateReportAcknowledgements operation.
+	AvailableDate   *time.Time // The date the report is available in ISO 8601 date time format.
 }
 
 //ReportRequestListResult .
@@ -31,16 +31,16 @@ type ReportRequestListResult struct {
 
 //ReportRequestInfo .
 type ReportRequestInfo struct {
-	ReportRequestID        string `xml:"ReportRequestId"`
-	ReportType             string
-	StartDate              time.Time
-	EndDate                time.Time
-	Scheduled              bool
-	SubmittedDate          time.Time
-	ReportProcessingStatus string
-	GeneratedReportID      string `xml:"GeneratedReportId"`
-	StartedProcessingDate  time.Time
-	CompletedDate          time.Time
+	ReportRequestID        string `xml:"ReportRequestId"` // A unique report request identifier
+	ReportType             string // The ReportType value requested
+	StartDate              time.Time // The start of a date range used for selecting the data to report in ISO 8601 date time format.
+	EndDate                time.Time // The end of a date range used for selecting the data to report
+	Scheduled              bool // A Boolean value that indicates if a report is scheduled
+	SubmittedDate          time.Time // The date when the report was submitted in ISO 8601 date time format.
+	ReportProcessingStatus string // The processing status of the report.
+	GeneratedReportID      string `xml:"GeneratedReportId"` // The report identifier used to retrieve the report
+	StartedProcessingDate  time.Time // The date when the report processing started
+	CompletedDate          time.Time // The date when the report processing completed in ISO 8601 date time format
 }
 
 //Reports .
